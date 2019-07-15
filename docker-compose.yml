@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  ui:
+    build: ./docker/ui
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./client:/usr/src/app
+    ports:
+      - "3001:3000"
+    command: yarn start
+  
+  webapi:
+    build: ./docker/webapi
+    container_name: webapi
+    tty: true
+    volumes:
+      - ./webapi/:/usr/src/app
+    ports:
+      - "3000:3000"
+    command: npm start
